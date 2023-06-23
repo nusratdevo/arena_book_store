@@ -4,76 +4,113 @@ import Sidemenu from './Sidemenu'
 function MyDashboard() {
 	return (
 	
-	<div class=" mb-4 p-5" style={{ border: '5px solid #e3f2fd ' }}>
-    <div class="row">
+	<div className=" mb-4 p-2" style={{ border: '5px solid #e3f2fd ' }}>
+    <div className="row">
         
         <Sidemenu/>
-        <div class="col-lg-8 pb-5">
-            <div class="d-flex justify-content-end pb-3">
-                <div class="form-inline">
-                    <label class="text-muted mr-3" for="order-sort">Sort Orders</label>
-                    <select class="form-control" id="order-sort">
-                        <option>All</option>
-                        <option>Delivered</option>
-                        <option>In Progress</option>
-                        <option>Delayed</option>
-                        <option>Canceled</option>
-                    </select>
+        <div className="col-lg-9">
+            <div className="panel">
+                <div className="panel-heading">
+                    <div className="row">
+                        <div className="col-md-12 col-xs-12 d-flex ">
+                            <a href="#" className="btn btn-sm btn-primary"><i className="fa fa-plus-circle"></i> Add New</a>
+                                    <form className="form-horizontal" style={{ marginLeft: '400px' }}>
+                                    <div className="form-inline ">
+                                    <label for="order-sort">Sort Orders</label>
+                                    <select className="form-control" id="order-sort">
+                                        <option>All</option>
+                                        <option>Delivered</option>
+                                        <option>In Progress</option>
+                                        <option>Delayed</option>
+                                        <option>Canceled</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div className="panel-body table-responsive">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th >#</th>
+                                <th>Product Title</th>
+                                <th>Details</th>
+                                <th>Image</th>
+                                <th>Status</th>
+                                <th>View</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                               
+                                <td>1</td>
+                                <td>Product Title</td>
+                                        <td>Details 
+                                        {/* <p>
+                                        {item.description.length > 250 ?
+                                            `${item.description.substring(0, 250)}...` : item.description
+                                        }
+                                        </p> */}
+                                </td>
+                                <td className="product-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams"/></td>
+                                <td className=''>Status</td>
+                                <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a></td>
+                                <td>
+                                    <ul className="action-list">
+                                    <li><a href="#" className="btn btn-primary"><i className="fa fa-pencil-alt"></i></a></li>
+                                        <li><a href="#" className="btn btn-danger"><i className="fa fa-times"></i></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                
+                                <td>2</td>
+                                <td>Product Title</td>
+                                <td>Details</td>
+                                <td className="product-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams"/></td>
+                                <td className=''>Status</td>
+                                <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a></td>
+                                <td>
+                                    <ul className="action-list">
+                                        <li><a href="#" className="btn btn-primary"><i className="fa fa-pencil-alt"></i></a></li>
+                                        <li><a href="#" className="btn btn-danger"><i className="fa fa-times"></i></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+                <div className="num-footer">
+                    <div className="row">
+                        <div className="col-sm-6 col-xs-6">showing <b>5</b> out of <b>25</b> entries</div>
+                        <div className="col-sm-6 col-xs-6">
+                            <ul className="pagination hidden-xs" style={{ marginLeft: '80px' }}> 
+                                <li><a href="#">«</a></li>
+                                <li className="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                            {/* <ul className="pagination visible-xs pull-right">
+                                <li><a href="#">«</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul> */}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th>Order #</th>
-                            <th>Date Purchased</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
-                            <td>August 08, 2017</td>
-                            <td><span class="btn btn-danger btn-sm m-0">Canceled</span></td>
-                            <td><span>$760.50</span></td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">34VB5540K83</a></td>
-                            <td>July 21, 2017</td>
-                            <td><span class="btn btn-info m-0">In Progress</span></td>
-                            <td>$315.20</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">112P45A90V2</a></td>
-                            <td>June 15, 2017</td>
-                            <td><span class="btn btn-warning m-0">Delayed</span></td>
-                            <td>$1,264.00</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">28BA67U0981</a></td>
-                            <td>May 19, 2017</td>
-                            <td><span class="btn btn-success m-0">Delivered</span></td>
-                            <td>$198.35</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">502TR872W2</a></td>
-                            <td>April 04, 2017</td>
-                            <td><span class="btn btn-success m-0">Delivered</span></td>
-                            <td>$2,133.90</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">47H76G09F33</a></td>
-                            <td>March 30, 2017</td>
-                            <td><span class="btn btn-success m-0">Delivered</span></td>
-                            <td>$86.40</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        
+	</div>
         </div>
-    </div>
 </div>
+            
+
+
 
   )
 }

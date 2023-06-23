@@ -7,9 +7,11 @@ import BookList from "./components/BookList";
 import BookDetail from "./components/BookDetail";
 import BookCart from "./components/BookCart";
 import Header from "./components/Header";
-import Order from "./components/Order";
+import ProductAdd from "./components/ProductAdd";
 
 import MyDashboard from "./components/MyDashboard";
+import Order from "./components/Order";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -20,7 +22,11 @@ function App() {
               <Route path="/" element={<BookList/>} />
               <Route path="/book/:id" element={<BookDetail/>} />
               <Route path="/cart" element={<BookCart />} />
-              <Route path="/my-dashboard" element={<MyDashboard/>} />
+              <Route path="/my-dashboard" element={<MyDashboard />} />
+              <Route path="/add-product" element={<ProductAdd />} />
+              <Route path="/my-order" element={<Order />} />
+          <Route element={<NotFound />} />
+          <Route path="/*"  element={<NotFound />} />
           </Routes>
         </div>
       
