@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import AllService from "../services/AllService";
-import { Link, useParams ,useNavigate} from "react-router-dom";
-function BookDetail() {
+import { Link, useParams, useNavigate, json } from "react-router-dom";
+
+import { cartContext } from '../Context';
+
+function BookDetail() { 
     const navigate = useNavigate();
     let { id } = useParams();
     const [loading, setLoading] = useState(true);
@@ -14,6 +17,8 @@ function BookDetail() {
     } );
     const [inputImage, setImage] = useState([]);
     const [errorInput, setError] = useState([]);
+    const [cartButtonClick, setCartButtonClick] = useState(false);
+    const { cartData, setCartData } = useContext(cartContext);
 
     useEffect(() => {
         
@@ -32,8 +37,66 @@ function BookDetail() {
 
             }
         });
-
+        checkProductInCart(id);
     }, []);
+
+    const cartAddButtonHandlar = () => {
+        var previousCart = localStorage.getItem('cartData');
+        var cartJson = JSON.parse(previousCart);
+
+        const cartData = 
+            {
+                product: {
+                    'id': bookInput.id,
+                    'title': bookInput.title,
+                    'image': bookInput.image,
+                    'price': bookInput.price
+                }
+            }
+        if (cartJson != null) {
+            cartJson.push(cartData);
+            var cartSrting = JSON.stringify(cartJson);
+            localStorage.setItem('cartData', cartSrting);
+            setCartData(cartJson);
+        } else {
+            
+            var newCartList=[]
+            newCartList.push(cartData);
+            var cartSrting = JSON.stringify(newCartList);
+            localStorage.setItem('cartData', cartSrting);
+        }
+        
+        setCartButtonClick(true);
+   }
+    const cartRemoveButtonHandlar = () => {
+        var previousCart = localStorage.getItem('cartData');
+        var cartJson = JSON.parse(previousCart);
+        cartJson.map((cart, index) => {
+            if (cart != null && cart.product.id == bookInput.id) {
+                // delete cartJson[index];
+                cartJson.splice(index, 1);
+            }
+        });
+        var cartSrting = JSON.stringify(cartJson);
+        localStorage.setItem('cartData', cartSrting);
+        setCartButtonClick(false);
+        setCartData(cartJson);
+     }
+
+
+    function checkProductInCart(id) {
+        var previousCart = localStorage.getItem('cartData');
+        var cartJson = JSON.parse(previousCart);
+        if (cartJson != null) {
+            cartJson.map((cart, index) => {
+                if (cart != null && cart.product.id == id) {
+                    setCartButtonClick(true);
+                }
+            });
+        }
+        
+   }
+
   return (
 	<div class="container">
     <div class="col-lg-10 border p-3 main-section bg-white">
@@ -78,9 +141,25 @@ function BookDetail() {
                         </div> */}
                         <div class="col-lg-12 mt-3">
                             <div class="row">
-                                      <div class="col-lg-6 pb-2">
-                                      {bookInput.status ? <Link to={'/cart'} class="btn btn-danger w-100">Add To Cart</Link> : "Out of stock"}
-                                    
+                                <div class="col-lg-6 pb-2">
+                                {/* {bookInput.status ? <Link to={'/cart'} class="btn btn-danger w-100">Add To Cart</Link> : "Out of stock"} */}
+                                {!cartButtonClick && 
+                                <button type="button"
+                                title='add cart button'
+                                    className="btn btn-primary me-1 mb-1 w-100"
+                                    aria-hidden="true"
+                                    onClick={cartAddButtonHandlar}
+                                ><i className="fa-solid fa-cart-plus"></i>Add To Cart</button>
+                                }
+                             {cartButtonClick && 
+                                <button type="button"
+                                title='remove from cart button'
+                                    className="btn btn-warning me-1 mb-1 w-100"
+                                    aria-hidden="true"
+                                    onClick={cartRemoveButtonHandlar}
+                                ><i className="fa-solid fa-cart-plus"></i>Remove From Cart</button>
+                               }
+                            
                                 </div>
                                 <div class="col-lg-6">
                                 <Link to={'/my-dashboard'} class="btn btn-success w-100">Continue Shop</Link>

@@ -12,10 +12,14 @@ import ProductAdd from "./components/ProductAdd";
 import MyDashboard from "./components/MyDashboard";
 import Order from "./components/Order";
 import NotFound from "./components/NotFound";
+import { cartContext } from './Context';
+import { useState } from 'react';
+const checkCart = localStorage.getItem('cartData')
 
 function App() {
+  const [cartData, setCartData] = useState(JSON.parse(checkCart));
   return (
-    <>
+    <cartContext.Provider value={{cartData,setCartData}}>
      <Header />
       <div className="container mt-3">
           <Routes>
@@ -30,7 +34,7 @@ function App() {
           </Routes>
         </div>
       
-    </>
+    </cartContext.Provider>
   );
 }
 

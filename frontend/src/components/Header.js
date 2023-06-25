@@ -1,7 +1,17 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import {  cartContext } from '../Context';
+function Header(props) {
+	const { cartData, setCartData } = useContext(cartContext);
 
-function Header() {
+	if (cartData == null || cartData.length == 0) {
+		var cartItem = 0
+	  } else {
+		var cartItem = cartData.length
+	}
+	
+	
   return (
 	<nav className="navbar navbar-expand-lg navbar-light bg-light" >
 			<div className="container">
@@ -22,7 +32,10 @@ function Header() {
 				</li>
 				<li className="nav-item">
 					<Link to={"/cart"} className="nav-link">
-					   Card
+							  Card
+							({cartItem})
+							 
+							  
 					</Link>
 				</li>
 				<li className="nav-item">
