@@ -72,5 +72,5 @@ Version 1 completed and hosted
 ---
 
 <h2>Order List Page</h2>
-<img src="https://github.com/nusratdevo/arena_book_store/blob/screen/main/screen06.png" height="400">
+<img src="https://github.com/nusratdevo/arena_book_store/blob/main/screen/screen06.png" height="400">
 ---
