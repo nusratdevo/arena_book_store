@@ -4,8 +4,8 @@ const http = axios.create({
 	baseURL:"http://127.0.0.1:8000/api/product",
 	headers: {
 		'Accept':'application/json',
-		'Content-Type': 'application/json',
-		// "Authorization" : `Bearer ${usertoken}`
+		//'Content-Type': 'application/json',
+		//"Content-Type": "multipart/form-data",
 		   
 		
 	}
@@ -16,7 +16,13 @@ const http = axios.create({
 const getAll = () => {
 	return http.get("/");
 };
+const getById = (id) => {
+	return http.get(`/${id}/`);
+};
 
+const getAllCats = () => {
+	return http.get("/cat");
+};
 const create = data => {
 	return http.post("/", data);
 };
@@ -38,8 +44,9 @@ const removeAll = () => {
   };
   
   const AllService = {
-	getAll,
-	get,
+	  getAll,
+	  getById,
+	getAllCats,
 	create,
 	update,
 	remove,

@@ -17,13 +17,8 @@ function Sidemenu() {
             </div>
             <div className="wizard">
                 <nav className="list-group list-group-flush">
-                    <Link to={"/my-dashboard"} className="list-group-item active">
-                        <div className="d-flex justify-content-between align-items-center">
-                            <div><i className="fa fa-shopping-bag mr-1 text-muted"></i>
-                                <div className="d-inline-block font-weight-medium text-uppercase">Product List</div>
-                            </div>
-                        </div>
-                  </Link>
+                <Link to={"/my-dashboard"} className="list-group-item "><i className="fa fa-shopping-bag mr-1"></i>Product List</Link>
+                  
                   <a className="list-group-item" href=''><i className="fa fa-user text-muted"></i>Profile Settings</a>
                   <Link to={"/add-product"} className="list-group-item" href="#"><i className="fa fa-map-marker text-muted"></i>Add Product</Link>
                     <Link to={"/my-order"}className="list-group-item" href="">

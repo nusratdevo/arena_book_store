@@ -1,7 +1,78 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidemenu from './Sidemenu'
-
+import AllService from "../services/AllService";
+import { Link } from "react-router-dom";
 function MyDashboard() {
+
+    const [bookId, setBookId] = useState(null);
+    const [books, setBook] = useState([]);
+    const [searchTitle, setSearchTitle] = useState("");
+    let id =1
+    useEffect(() => {
+        retrieveBooks();
+        retrieveBook(id)
+      }, []);
+    
+      const retrieveBooks = () => {
+        AllService.getAll()
+          .then((res) => {
+              setBook(res.data);
+              console.log(res.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+    };
+    
+    const retrieveBook = (id) => {
+        AllService.getById(id)
+          .then((res) => {
+            setBookId(res.data);
+              console.log(res.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+    };
+
+    const refreshList = () => {
+        retrieveBooks();
+    };
+    
+    const onDelete = (id) => {
+        AllService.remove(id)
+          .then((res) => refreshList());
+      };
+    const removeAllBooks = () => {
+        AllService.removeAll()
+          .then(response => {
+            console.log(response.data);
+            refreshList();
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      };
+    
+    const onChangeSearchTitle = e => {
+        //value={searchTitle}
+        //onChange={onChangeSearchTitle}
+        const searchTitle = e.target.value;
+        setSearchTitle(searchTitle);
+    };
+
+    // const findByTitle = () => {
+    //    AllService.findByTitle(searchTitle)
+    //   .then(response => {
+    //     setBook(response.data);
+    //     console.log(response.data);
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
+    // };
+    
+
 	return (
 	
 	<div className=" mb-4 p-2" style={{ border: '5px solid #e3f2fd ' }}>
@@ -13,7 +84,7 @@ function MyDashboard() {
                 <div className="panel-heading">
                     <div className="row">
                         <div className="col-md-12 col-xs-12 d-flex ">
-                            <a href="#" className="btn btn-sm btn-primary"><i className="fa fa-plus-circle"></i> Add New</a>
+                        <Link to={'/add-product'} className="btn btn-sm btn-primary"><i className="fa fa-plus-circle"></i> Add New</Link>
                                     <form className="form-horizontal" style={{ marginLeft: '400px' }}>
                                     <div className="form-inline ">
                                     <label for="order-sort">Sort Orders</label>
@@ -43,43 +114,45 @@ function MyDashboard() {
                             </tr>
                         </thead>
                         <tbody>
+                           {books && books.map((book, index) => {
+                             return (
                             <tr>
-                               
-                                <td>1</td>
-                                <td>Product Title</td>
+                                <td>{book.id}</td>
+                                <td>{book.title} {book.category}</td>
                                         <td>Details 
-                                        {/* <p>
-                                        {item.description.length > 250 ?
-                                            `${item.description.substring(0, 250)}...` : item.description
+                                        <p>
+                                        {book.details.length > 50 ?
+                                            `${book.details.substring(0, 50)}...` : book.details
                                         }
-                                        </p> */}
+                                        </p>
                                 </td>
-                                <td className="product-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams"/></td>
-                                <td className=''>Status</td>
-                                <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a></td>
+                                     <td className="product-avatar">
+                                         {book.image ?
+                                             <img src={ `http://127.0.0.1:8000/${book.image}`} /> :
+                                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams" />
+                                         }
+                                     </td>
+                                     {/* <td>{book.category.title}</td> */}
+                                <td className="text-success"><b>{book.status ? "Available" : "Out of stock"}</b></td>
+                                <td><Link to={`/editbook/${book.id}`} className="btn btn-sm btn-success"><i className="fa fa-search"></i></Link></td>
                                 <td>
                                     <ul className="action-list">
-                                    <li><a href="#" className="btn btn-primary"><i className="fa fa-pencil-alt"></i></a></li>
-                                        <li><a href="#" className="btn btn-danger"><i className="fa fa-times"></i></a></li>
+                                    <li>
+                                    <Link to={`/editbook/${book.id}`} className="btn btn-primary"><i className="fa fa-pencil-alt"></i></Link>
+                                    
+                                    </li>
+                                    <li>
+                                        <button type="button"
+                                        className="btn btn-danger"
+                                        aria-hidden="true"
+                                        onClick={() => onDelete(book.id)}
+                                    ><i className="fa fa-trash"></i></button>
+                                    </li>
                                     </ul>
                                 </td>
                             </tr>
-                            <tr>
-                                
-                                <td>2</td>
-                                <td>Product Title</td>
-                                <td>Details</td>
-                                <td className="product-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams"/></td>
-                                <td className=''>Status</td>
-                                <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a></td>
-                                <td>
-                                    <ul className="action-list">
-                                        <li><a href="#" className="btn btn-primary"><i className="fa fa-pencil-alt"></i></a></li>
-                                        <li><a href="#" className="btn btn-danger"><i className="fa fa-times"></i></a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                           
+                            );
+                        })}
                         </tbody>
                     </table>
                 </div>
