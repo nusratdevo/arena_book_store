@@ -7,10 +7,8 @@ function MyDashboard() {
     const [bookId, setBookId] = useState(null);
     const [books, setBook] = useState([]);
     const [searchTitle, setSearchTitle] = useState("");
-    let id =1
     useEffect(() => {
         retrieveBooks();
-        retrieveBook(id)
       }, []);
     
       const retrieveBooks = () => {
@@ -24,16 +22,7 @@ function MyDashboard() {
           });
     };
     
-    const retrieveBook = (id) => {
-        AllService.getById(id)
-          .then((res) => {
-            setBookId(res.data);
-              console.log(res.data);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-    };
+   
 
     const refreshList = () => {
         retrieveBooks();
@@ -54,23 +43,6 @@ function MyDashboard() {
           });
       };
     
-    const onChangeSearchTitle = e => {
-        //value={searchTitle}
-        //onChange={onChangeSearchTitle}
-        const searchTitle = e.target.value;
-        setSearchTitle(searchTitle);
-    };
-
-    // const findByTitle = () => {
-    //    AllService.findByTitle(searchTitle)
-    //   .then(response => {
-    //     setBook(response.data);
-    //     console.log(response.data);
-    //   })
-    //   .catch(e => {
-    //     console.log(e);
-    //   });
-    // };
     
 
 	return (
@@ -106,6 +78,7 @@ function MyDashboard() {
                             <tr>
                                 <th >#</th>
                                 <th>Product Title</th>
+                                <th>Product Category</th>
                                 <th>Details</th>
                                 <th>Image</th>
                                 <th>Status</th>
@@ -118,7 +91,8 @@ function MyDashboard() {
                              return (
                             <tr>
                                 <td>{book.id}</td>
-                                <td>{book.title} {book.category}</td>
+                                     <td>{book.title} </td>
+                                     <td>{book.category.title}</td>
                                         <td>Details 
                                         <p>
                                         {book.details.length > 50 ?

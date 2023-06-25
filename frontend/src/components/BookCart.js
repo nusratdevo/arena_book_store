@@ -1,9 +1,10 @@
 import React from 'react'
 import { useContext, useState } from 'react';
 import {  cartContext } from '../Context';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
+import AllService from "../services/AllService";
 function BookCart() {
-
+  const navigate = useNavigate();
   const { cartData, setCartData } = useContext(cartContext);
   
   const [cartButtonClick, setCartButtonClick] = useState(false);
@@ -37,7 +38,29 @@ function BookCart() {
     setCartData(cartJson);
  }
 
-
+  const addOrderIndatable = () => {
+  var previousCart = localStorage.getItem('cartData');
+      var cartJson = JSON.parse(previousCart);
+      if (cartJson != null) {
+          cartJson.map((cart, index) => {
+              //submit Data
+      const formData = new FormData();
+      formData.append('product', cart.product.id); 
+      formData.append('price', cart.product.price);
+      formData.append('qty', 1);
+        
+      AllService.orderCreate( formData)
+        .then((res) => {
+          console.log(res.data);
+          navigate('/order-confirm');
+          localStorage.removeItem('cartData');
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      });
+  }
+}
 
   return (
 	<section className="h-100 h-custom" >
@@ -141,10 +164,15 @@ function BookCart() {
                             <div className="d-flex justify-content-between mb-4">
                               <Link to={'/'} className="btn btn-danger btn-block btn-sm">
                                 Shop More
-                              </Link>
-                              <Link to={'/'} className="btn btn-info btn-block btn-sm">
-                                Checkout <i className="fas fa-long-arrow-alt-right ms-2"></i>
-                              </Link>
+                            </Link>
+                              {/* <Link to={'/order-confirm'} className="btn btn-info btn-block btn-sm">
+                                Order Done <i className="fas fa-long-arrow-alt-right ms-2"></i>
+                            </Link> */}
+                            <button type="button"
+                                        className=" btn btn-info btn-block btn-sm"
+                                        aria-hidden="true"
+                                        onClick={() => addOrderIndatable()}>
+                                    Order Done <i className="fas fa-long-arrow-alt-right ms-2"></i></button>
                             </div>
                           </div>
                         </div>

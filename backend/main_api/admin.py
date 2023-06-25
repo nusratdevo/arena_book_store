@@ -13,3 +13,9 @@ class ProductAdmin(admin.ModelAdmin):
     list = ('title', 'details', 'category', 'price', 'image', 'status')
 
     admin.site.register(Product)
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list = ("id",'product',"price","qty", "image","total")
+
+    admin.site.register(Order)

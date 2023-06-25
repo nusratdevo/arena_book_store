@@ -44,6 +44,9 @@ function BookList() {
 								<div className="mb-2">
 									<h6 className="font-weight-semibold mb-2">
 										<a href="#" className="text-default mb-2" data-abc="true">{book.title}</a>
+									  </h6>
+									  <h6 className="font-weight-semibold mb-2">
+										<b>Category :</b> {book.category.title}
 									</h6>
 									  <a href="#" className="text-muted" data-abc="true">
 										  {book.details.length > 50 ?

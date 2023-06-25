@@ -8,7 +8,7 @@ import BookDetail from "./components/BookDetail";
 import BookCart from "./components/BookCart";
 import Header from "./components/Header";
 import ProductAdd from "./components/ProductAdd";
-
+import ConfirmOrder from "./components/ConfirmOrder";
 import MyDashboard from "./components/MyDashboard";
 import Order from "./components/Order";
 import NotFound from "./components/NotFound";
@@ -29,8 +29,9 @@ function App() {
               <Route path="/my-dashboard" element={<MyDashboard />} />
               <Route path="/add-product" element={<ProductAdd />} />
               <Route path="/my-order" element={<Order />} />
-          <Route element={<NotFound />} />
-          <Route path="/*"  element={<NotFound />} />
+              <Route path="/order-confirm" element={<ConfirmOrder/>} />
+                <Route element={<NotFound />} />
+                 <Route path="/*"  element={<NotFound />} />
           </Routes>
         </div>
       

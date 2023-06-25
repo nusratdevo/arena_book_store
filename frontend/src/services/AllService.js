@@ -16,6 +16,9 @@ const http = axios.create({
 const getAll = () => {
 	return http.get("/");
 };
+const getAllOrders = () => {
+	return http.get("/orderItem/");
+};
 const getById = (id) => {
 	return http.get(`/${id}/`);
 };
@@ -27,6 +30,9 @@ const create = data => {
 	return http.post("/", data);
 };
 
+const orderCreate = data => {
+	return http.post("/orderItem/", data);
+};
 const update = (id, data) => {
 	return http.patch(`/${id}/`, data);
 };
@@ -47,11 +53,14 @@ const removeAll = () => {
 	  getAll,
 	  getById,
 	getAllCats,
-	create,
+	  create,
+	  orderCreate,
 	update,
 	remove,
 	removeAll,
-	findByTitle
+	  findByTitle,
+	  http,
+	  getAllOrders
   };
   
   export default AllService;

@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidemenu from './Sidemenu'
-
+import AllService from "../services/AllService";
+import { Link } from "react-router-dom";
 
 function Order() {
+    const [books, setBook] = useState([]);
+
+
+    useEffect(() => {
+        retrieveBooks();
+      }, []);
+    
+      const retrieveBooks = () => {
+        AllService.getAllOrders()
+          .then((res) => {
+              setBook(res.data);
+              console.log(res.data);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+    };
+    
 	return (
 	  
     <div className=" mb-4 p-2" style={{ border: '5px solid #e3f2fd ' }}>
@@ -36,51 +55,36 @@ function Order() {
                             <tr>
                                 <th >#</th>
                                 <th>Product Title</th>
+                                <th>Product Category</th>
                                 <th>Details</th>
-                                <th>Image</th>
+                                <th>Price</th>
+                                <th>Qty</th>
                                 <th>Status</th>
-                                <th>View</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                           {books && books.map((book, index) => {
+                             return (
                             <tr>
+                                <td>{book.id}</td>
+                                     <td>{book.product.title} </td>
+                                     <td>{book.product.category.title}</td>
+                                <td className="product-avatar">
+                                         {book.product.image ?
+                                             <img src={ `${book.product.image}`} /> :
+                                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams" />
+                                         }
+                                     </td>
                                
-                                <td>1</td>
-                                <td>Product Title</td>
-                                        <td>Details 
-                                        {/* <p>
-                                        {item.description.length > 250 ?
-                                            `${item.description.substring(0, 250)}...` : item.description
-                                        }
-                                        </p> */}
-                                </td>
-                                <td className="product-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams"/></td>
-                                <td className=''>Status</td>
-                                <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a></td>
-                                <td>
-                                    <ul className="action-list">
-                                    <li><a href="#" className="btn btn-primary"><i className="fa fa-pencil-alt"></i></a></li>
-                                        <li><a href="#" className="btn btn-danger"><i className="fa fa-times"></i></a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
+                                     <td>
+                                     {book.price}
+                                     </td>
+                                     <td>{book.qty}</td>
+                                     <td>Status</td>
                                 
-                                <td>2</td>
-                                <td>Product Title</td>
-                                <td>Details</td>
-                                <td className="product-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams"/></td>
-                                <td className=''>Status</td>
-                                <td><a href="#" className="btn btn-sm btn-success"><i className="fa fa-search"></i></a></td>
-                                <td>
-                                    <ul className="action-list">
-                                        <li><a href="#" className="btn btn-primary"><i className="fa fa-pencil-alt"></i></a></li>
-                                        <li><a href="#" className="btn btn-danger"><i className="fa fa-times"></i></a></li>
-                                    </ul>
-                                </td>
                             </tr>
-                           
+                            );
+                        })}
                         </tbody>
                     </table>
                 </div>

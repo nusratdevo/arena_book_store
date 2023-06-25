@@ -129,7 +129,7 @@ function BookDetail() {
                             <hr class="m-0 pt-2 mt-2"/>
                         </div>
                         <div class="col-lg-12">
-                            <p class="tag-section"><strong>Category: </strong>{bookInput.category}</p>
+                            <p class="tag-section"><strong>Category: </strong>{bookInput.category.title}</p>
                   </div>
                   <div class="col-lg-12">
                             <p class="m-0 p-0 price-pro"> <strong>Price: </strong>{bookInput.price}</p>
