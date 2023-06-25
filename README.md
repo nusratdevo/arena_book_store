@@ -51,26 +51,26 @@ Version 1 completed and hosted
 
 
 <h2>Home Page</h2>
-<img src="https://github.com/nusratdevo/arena_book_store/blob/screen/screen01.png" height="400">
+<img src="https://github.com/nusratdevo/arena_book_store/blob/main/screen/screen01.png" height="400">
 ---
 
 
 <h2>Product book Page</h2>
-<img src="https://github.com/nusratdevo/arena_book_store/blob/screen/screen02.png" height="400">
+<img src="https://github.com/nusratdevo/arena_book_store/blob/main/screen/screen02.png" height="400">
 ---
 
 <h2>Cart Page</h2>
-<img src="https://github.com/nusratdevo/arena_book_store/blob/screen/screen03.png" height="400">
+<img src="https://github.com/nusratdevo/arena_book_store/blob/main/screen/screen03.png" height="400">
 ---
 
 <h2>Dashboard list Page</h2>
-<img src="https://github.com/nusratdevo/arena_book_store/blob/screen/screen04.png" height="400">
+<img src="https://github.com/nusratdevo/arena_book_store/blob/main/screen/screen04.png" height="400">
 ---
 
 <h2>Add Book Page</h2>
-<img src="https://github.com/nusratdevo/arena_book_store/blob/screen/screen05.png" height="400">
+<img src="https://github.com/nusratdevo/arena_book_store/blob/main/screen/screen05.png" height="400">
 ---
 
 <h2>Order List Page</h2>
-<img src="https://github.com/nusratdevo/arena_book_store/blob/screen/screen06.png" height="400">
+<img src="https://github.com/nusratdevo/arena_book_store/blob/screen/main/screen06.png" height="400">
 ---
