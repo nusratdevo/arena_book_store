@@ -34,7 +34,7 @@ function BookList() {
 								<div className="card-img-actions">
 										
 							{book.image ?
-									<img src={ `http://127.0.0.1:8000/${book.image}`}className="card-img img-fluid" style={{ height: '150px' , width:'200px'}} /> :
+									<img src={ `${book.image}`}className="card-img img-fluid" style={{ height: '150px' , width:'200px'}} /> :
 									<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" className="card-img img-fluid" style={{ height: '150px' }} />
 								}
 								</div>

@@ -102,7 +102,7 @@ function MyDashboard() {
                                 </td>
                                      <td className="product-avatar">
                                          {book.image ?
-                                             <img src={ `http://127.0.0.1:8000/${book.image}`} /> :
+                                             <img src={ `${book.image}`} /> :
                                              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams" />
                                          }
                                      </td>

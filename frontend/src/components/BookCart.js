@@ -53,7 +53,7 @@ function BookCart() {
         .then((res) => {
           console.log(res.data);
           navigate('/order-confirm');
-          localStorage.removeItem('cartData');
+          // localStorage.removeItem('cartData');
         })
         .catch(e => {
           console.log(e);
@@ -77,7 +77,8 @@ function BookCart() {
 
                       <div className="col-lg-7">
                         <div><h5 className="mb-3 d-flex"><i className="fa-solid fa-cart-plus me-2"></i>
-                          Cart Count ({cartItem})
+                        Cart Count
+                        ({cartItem})
                         </h5></div>
                     
                         <hr />

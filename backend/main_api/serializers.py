@@ -11,7 +11,6 @@ class CategoryListSerializer(serializers.ModelSerializer):
 class ProductListSerializer(serializers.ModelSerializer):
     # category_list = serializers.StringRelatedField(many=True, read_only=True)
     # image = serializers.Base64ImageField(max_length=None, use_url=True,)
-    category = CategoryListSerializer()
     class Meta:
         model = Product
         fields = ["id","category","title", "details","price", "status","image"]
@@ -33,8 +32,22 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
 
 class OrderListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Order
+        fields = ["id",'product',"price","qty", "image","total"]
+
+
+
+class AllProductViewSerializer(serializers.ModelSerializer):
+    category = CategoryListSerializer()
+    class Meta:
+        model = Product
+        fields = ["id","category","title", "details","price", "status","image"]
+
+class AllOrderViewSerializer(serializers.ModelSerializer):
     product=ProductListSerializer()
     class Meta:
         model = Order
         fields = ["id",'product',"price","qty", "image","total"]
-        
+

@@ -14,10 +14,10 @@ const http = axios.create({
   
 
 const getAll = () => {
-	return http.get("/");
+	return http.get("/view");
 };
 const getAllOrders = () => {
-	return http.get("/orderItem/");
+	return http.get("/orderList/");
 };
 const getById = (id) => {
 	return http.get(`/${id}/`);

@@ -55,8 +55,7 @@ function Order() {
                             <tr>
                                 <th >#</th>
                                 <th>Product Title</th>
-                                <th>Product Category</th>
-                                <th>Details</th>
+                                <th>Image</th>
                                 <th>Price</th>
                                 <th>Qty</th>
                                 <th>Status</th>
@@ -68,7 +67,6 @@ function Order() {
                             <tr>
                                 <td>{book.id}</td>
                                      <td>{book.product.title} </td>
-                                     <td>{book.product.category.title}</td>
                                 <td className="product-avatar">
                                          {book.product.image ?
                                              <img src={ `${book.product.image}`} /> :
